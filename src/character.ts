@@ -36,7 +36,7 @@ export class Character implements Fighter{
     }
 
     setBonusDamage(bonusDamage: number){
-        this.bonusDamage += bonusDamage;
+        this.bonusDamage = bonusDamage;
     }
 
 }
