@@ -21,6 +21,8 @@ Utilisez ensuite NPM pour installer Typescript :
 
 Que signifie l'option `--save-dev` ?
 
+--save-dev adds the third-party package to the package's development dependencies. It won't be installed when someone runs npm install directly to install your package. It's typically only installed if someone clones your source repository first and then runs npm install in it.
+
 Initialisez ensuite le fichier de configuration `tsconfig.json` :
 
 `npx tsc --init --rootDir src --outDir build --esModuleInterop --lib es6 --module commonjs --allowJs true --noImplicitAny true`
