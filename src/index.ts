@@ -1,7 +1,7 @@
-import { Guerrier } from "./Classes/guerrier"
-import { Enemy } from "./enemy"
-import { Mage } from "./Classes/mage";
-import { Axe } from "./Weapon/axe";
+import {Guerrier} from "./Classes/guerrier"
+import {Enemy} from "./enemy"
+import {Mage} from "./Classes/mage";
+import {Axe} from "./Weapon/axe";
 import {Sword} from "./Weapon/sword";
 import {FireStaff} from "./Weapon/fireStaff";
 import {FrostStaff} from "./Weapon/frostStaff";
@@ -35,11 +35,10 @@ const setHero = [
 ];
 
 
-
 (async () => {
     const responseSetHero = await prompts(setHero);
     let hero: any;
-    if (responseSetHero.classe === '1'){
+    if (responseSetHero.classe === '1') {
 
         const responseWeapon = await prompts({
             type: 'select',
@@ -51,7 +50,7 @@ const setHero = [
                 {title: 'Epee', value: 2},
             ],
         });
-        switch (responseWeapon.value){
+        switch (responseWeapon.value) {
             case 1:
                 let axe = new Axe();
                 hero = new Guerrier(responseSetHero.name, responseSetHero.sexe, axe);
@@ -64,7 +63,7 @@ const setHero = [
                 console.log(`Désolé, nous attendons un choix correct of ${responseWeapon.value}`)
         }
 
-    } else if (responseSetHero.classe === '2'){
+    } else if (responseSetHero.classe === '2') {
 
         const responseWeapon = await prompts({
             type: 'select',
@@ -76,13 +75,13 @@ const setHero = [
                 {title: 'Baton de givre', value: 2},
             ],
         });
-        switch (responseWeapon.value){
+        switch (responseWeapon.value) {
             case 1:
                 let fireStaff = new FireStaff();
                 hero = new Mage(responseSetHero.name, responseSetHero.sexe, fireStaff);
                 break;
             case 2:
-                let frostStaff =  new FrostStaff();
+                let frostStaff = new FrostStaff();
                 hero = new Mage(responseSetHero.name, responseSetHero.sexe, frostStaff);
                 break;
             default:
@@ -94,7 +93,7 @@ const setHero = [
     console.log('\n Ennemi en approche !');
 
     let endGame = false;
-    while (!endGame) {
+    do {
         const responseMouv = await prompts({
             type: 'select',
             name: 'value',
@@ -105,26 +104,46 @@ const setHero = [
                 {title: 'Fuir', value: 2},
             ],
         });
-        if (responseMouv.value === 2) {
-            console.log("Fin de la partie, vous avez fui")
-            break;
-        } else if (responseMouv.value === 1) {
+        let random: number = 2 //Math.floor(Math.random() * 2)
+        let taunt: boolean = false;
+        do {
             let enemy = new Enemy("Gobelin");
-            hero.attack(enemy);
-            if (enemy.life <= 0) {
-                console.log(`Vous avez vaincu l'ennemi ${enemy.name}`)
-            } else {
-                console.log(`L'ennemi ${enemy.name} riposte: `)
-                enemy.attack(hero)
-                if (hero.life <= 0) {
-                    console.log(`Vous avez été vaincu par ${enemy.name}`)
+            if (responseMouv.value === 2) {
+                if (random == 1) {
+                    console.log("Fin de la partie, vous avez fui");
+                    console.log(`........................................`)
                     endGame = true;
+                    break;
+                } else if (random == 2) {
+                    console.log(`........................................`)
+                    console.log("L'ennemi vous rattrape ... !")
+                    console.log(`${enemy.name} dit : `)
+                    await enemy.getReplique();
+                    responseMouv.value = 1;
+                    taunt = true;
+                }
+            } else if (responseMouv.value === 1) {
+                taunt = false;
+                hero.attack(enemy);
+                if (enemy.life <= 0) {
+                    console.log(`Vous avez vaincu l'ennemi ${enemy.name}`)
+                    console.log(`........................................`)
                 } else {
-                    console.log(`Il vous reste ${hero.life} points de vie`)
+                    console.log(`........................................`)
+                    console.log(`L'ennemi ${enemy.name} riposte: `)
+                    enemy.attack(hero)
+                    if (hero.life <= 0) {
+                        console.log(`Vous avez été vaincu par ${enemy.name}`)
+                        console.log(`........................................`)
+                        endGame = true;
+                    } else {
+                        console.log(`Il vous reste ${hero.life} points de vie`)
+                        console.log(`........................................`)
+                    }
                 }
             }
-        }
-    }
+        } while (taunt);
+    } while (!endGame);
 })();
 
 

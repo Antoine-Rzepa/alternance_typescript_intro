@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@types/prompts": "^2.0.14",
+    "axios": "^0.21.1",
     "multiselect-prompt": "^0.3.2",
     "prompts": "^2.4.1"
   }
