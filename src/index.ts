@@ -104,7 +104,7 @@ const setHero = [
                 {title: 'Fuir', value: 2},
             ],
         });
-        let random: number = 2 //Math.floor(Math.random() * 2)
+        let random: number = Math.floor(Math.random() * 2)
         let taunt: boolean = false;
         do {
             let enemy = new Enemy("Gobelin");

@@ -1,6 +1,6 @@
 import {Character} from "./character";
 import {Fighter} from "./fighter";
-import axios, {AxiosResponse} from 'axios';
+import axios from 'axios';
 
 
 export class Enemy implements Fighter{
