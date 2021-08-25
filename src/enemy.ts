@@ -18,7 +18,7 @@ export class Enemy implements Fighter{
     }
 
     attack(charac: Character) :void{
-        let degats = Math.floor(Math.random() * 100);
+        let degats = Math.floor(Math.random() * 100 + 1);
         charac.takeDamage(degats);
     }
 

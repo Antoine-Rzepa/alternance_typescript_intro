@@ -20,7 +20,7 @@ export class Character implements Fighter{
     }
 
     attack(enemy: Enemy) :void{
-        let degats = Math.floor(Math.random() * 100);
+        let degats = Math.floor(Math.random() * 100 + 1);
         enemy.takeDamage((degats + this.bonusDamage));
     }
 

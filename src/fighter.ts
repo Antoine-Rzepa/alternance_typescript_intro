@@ -1,7 +1,7 @@
 
 export interface Fighter {
 
-    attack(perso: any, ): void
+    attack(perso: Fighter): void
 
     takeDamage(damage: number): void
 }
