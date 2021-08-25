@@ -19,9 +19,10 @@ export class Character implements Fighter{
             Sexe : ${this.sexe}`);
     }
 
-    attack(enemy: Enemy) :void{
+    attack(enemy: Enemy) :string{
         let degats = Math.floor(Math.random() * 100 + 1);
         enemy.takeDamage((degats + this.bonusDamage));
+        return enemy.name;
     }
 
     takeDamage(damage: number): void {
@@ -30,8 +31,9 @@ export class Character implements Fighter{
         console.log(`Vous avez subis ${degatSubis} de dégâts`)
     }
 
-    setLife(life: number){
+    setLife(life: number): number{
         this.life = life;
+        return life;
     }
 
     setBonusDamage(bonusDamage: number){

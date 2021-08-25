@@ -4,7 +4,8 @@
   "description": "_En préambule, pensez à créer un fork de ce projet dans votre espace personnel sur Github. Clonez ensuite ce fork dans votre espace de travail local._\r _Assurez-vous également que Node.js et NPM sont installés et à jour sur votre poste de travail._",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "test": "jest",
     "reload": "nodemon -I"
   },
   "repository": {
@@ -19,7 +20,10 @@
   },
   "homepage": "https://github.com/Antoine-Rzepa/alternance_typescript_intro#readme",
   "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
+    "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   },
